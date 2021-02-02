@@ -1,0 +1,41 @@
+<html>
+   <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      </script>
+      <script type=text/javascript>
+         $(function() {
+            $('button').click(function() {
+               $.ajax({
+                     url: '/result',
+                     data: $('form').serialize(),
+                     type: 'POST',
+                     success: function(response) {
+                        console.log(response);
+                        $("#result").text(response.result);
+                     },
+                     error: function(error) {
+                        console.log(error);
+                     }
+               });
+            });
+         });
+       </script>
+   </head>
+   <body>
+      <table align="center">
+         <tr><td colspan="2" align="center"><H1>Second-hand house for sale</H1></td></tr>
+         <tr>
+            <td><img src="/static/house.jpg" width="500" height="600"></td>
+            <td>   
+               <form action = "/result" method = "POST">
+                  <p>Lot size <input type = "number" name = "LotArea" /> feet^2</p>
+                  <p>First Floor size <input type = "number" name = "1stFlrSF" /> feet^2</p>
+                  <p>Second Floor size <input type = "number" name = "2ndFlrSF" /> feet^2</p>
+                  <p><button id="button" class="btn btn-lg btn-primary btn-block" type="button">Submit</button></p>
+                  <p>Predicted house price =  <span id=result></span> USD</p>
+               </form>
+            </td>
+         </tr>
+      </table>
+   </body>
+</html>
